@@ -2,7 +2,7 @@ const template = require("./template");
 
 module.exports = ({ user }) => {
   return template(
-    {},
+    { user },
     `
       <div class="register-confirm">
         <p>Hey ${user.username}! 👋</p>

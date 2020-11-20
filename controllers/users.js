@@ -11,6 +11,12 @@ controller.get("/register", (req, res) => {
 controller.post("/register", async (req, res) => {
   try {
     const user = await User.create({ username: req.body.username });
+
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+    };
+
     return res.send(usersRegisterConfirmView({ user }));
   } catch (e) {
     console.error(e);
@@ -18,7 +24,7 @@ controller.post("/register", async (req, res) => {
     const error = e.errors
       ? e.errors.map((e) => e.message).join(", ")
       : e.message;
-      
+
     res.send(usersRegisterView({ error }));
   }
 });

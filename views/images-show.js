@@ -12,12 +12,16 @@ function getComment(comment) {
 function getComments(comments) {
   return `
     <div class="comments">
-      ${comments.map(getComment).join('')}
+      ${comments.map(getComment).join("")}
     </div>
   `;
 }
 
-function getCreateCommentForm(image) {
+function getCreateCommentForm(user, image) {
+  if (!user) {
+    return "";
+  }
+
   return `
     <div class="create-comment">
       <form method="POST" action="/images/${image.id}/comments">
@@ -44,7 +48,7 @@ module.exports = ({ image, user } = {}) => {
           <div>💬 ${image.comments.length}</div>
         </div>
         ${getComments(image.comments)}
-        ${getCreateCommentForm(image)}
+        ${getCreateCommentForm(user, image)}
       </div>
       <script src="/sync-comment.js"></script>
     `

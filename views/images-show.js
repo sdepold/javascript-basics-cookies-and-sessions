@@ -17,6 +17,22 @@ function getComments(comments) {
   `;
 }
 
+function getCreateCommentForm(image) {
+  return `
+    <div class="create-comment">
+      <form method="POST" action="/images/${image.id}/comments">
+        <label>
+          Your comment:
+
+          <textarea name="comment" id="comment-content" data-image-id="${image.id}"></textarea>
+        </label>
+
+        <input type="submit" value="Save your comment">
+      </form>
+    </div>
+  `;
+}
+
 module.exports = ({ image, user } = {}) => {
   return template(
     { user },
@@ -28,6 +44,7 @@ module.exports = ({ image, user } = {}) => {
           <div>💬 ${image.comments.length}</div>
         </div>
         ${getComments(image.comments)}
+        ${getCreateCommentForm(image)}
       </div>
       <script src="/sync-comment.js"></script>
     `

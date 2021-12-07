@@ -33,6 +33,7 @@ app.use(expressSession({ // Configures session handling
 // Routes are registered here
 app.use("/", require("./controllers/home"));
 app.use("/users", require("./controllers/users"));
+app.use("/sessions", require("./controllers/sessions"));
 app.use("/images", require("./controllers/images"));
 app.use("/hello", require("./controllers/hello"));
 
